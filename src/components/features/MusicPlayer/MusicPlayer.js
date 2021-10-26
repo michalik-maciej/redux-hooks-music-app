@@ -13,12 +13,13 @@ const MusicPlayer = ({
   updateSong,
 }) => {
   let player = null;
+  let currentTime = 0;
 
   useEffect(() => {
     return () => {
       updateSong({
         songId: id,
-        timeElapsed: 0,
+        timeElapsed: currentTime,
       });
     };
   }, []);
