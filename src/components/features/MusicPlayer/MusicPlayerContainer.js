@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { updateCurrentSong } from '../../../redux/songsRedux';
 
 const mapDispatchToProps = (dispatch) => ({
-  updateSong: (data) => dispatch(updateCurrentSong(data)),
+  updateCurrentSong: data => dispatch(updateCurrentSong(data)),
 });
 
 export default connect(null, mapDispatchToProps)(MusicPlayer);

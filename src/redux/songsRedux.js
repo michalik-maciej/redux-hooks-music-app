@@ -11,7 +11,7 @@ export const getAllSongs = (state) => {
 export const countSongs = (state) => state.songs.data.length;
 
 export const getSongById = (state, songId) => {
-  return state.songs.data.find((song) => song.id === songId);
+  return state.songs.data.find(song => song.id === songId);
 };
 
 // action name creators

@@ -4,32 +4,38 @@ import clsx from 'clsx';
 import { useEffect } from 'react';
 
 const MusicPlayer = ({
-  title,
-  author,
+  // eslint-disable-next-line no-unused-vars
+  title,author,
   filename,
   className = '',
-  startAt = 0,
+  //startAt = 0,
   id,
-  updateSong,
+  updateCurrentSong,
 }) => {
   let player = null;
   let currentTime = 0;
 
   useEffect(() => {
     return () => {
-      updateSong({
+      updateCurrentSong({
         songId: id,
-        timeElapsed: currentTime,
+        timeElapsed: currentTime, // player.currentTime jest wtedy już = 0
       });
+      player.removeEventListener('timeupdate', updateCurrentTime); //dobra praktyka
     };
   }, []);
+
+  const updateCurrentTime = () => {
+    currentTime = player.currentTime;
+  };
 
   const handlePlayer = (e) => {
     //console.log(e);
     if (e && e.audioEl) {
       //console.log(e.audioEl.current);
       player = e.audioEl.current;
-      player.currentTime = startAt;
+      player.addEventListener('timeupdate', updateCurrentTime);
+      //player.currentTime = startAt;
       player.play();
     }
   };
@@ -48,13 +54,13 @@ const MusicPlayer = ({
 };
 
 MusicPlayer.propTypes = {
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  author: PropTypes.string,
   filename: PropTypes.string,
   startAt: PropTypes.number,
   className: PropTypes.string,
-  id: PropTypes.string,
-  updateSong: PropTypes.func.isRequired,
+  id: PropTypes.number,
+  updateCurrentSong: PropTypes.func.isRequired,
 };
 
 export default MusicPlayer;

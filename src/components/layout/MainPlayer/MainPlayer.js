@@ -1,5 +1,5 @@
-import MusicPlayer from '../../features/MusicPlayer/MusicPlayer';
 import Container from '../Container/Container';
+import MusicPlayer from '../../features/MusicPlayer/MusicPlayerContainer';
 import { useLocation } from 'react-router-dom';
 
 const MainPlayer = () => {
